@@ -5,6 +5,7 @@ const categoryRoutes = require('./routes/category');
 const moduleRoutes = require('./routes/module');
 const questionRoutes = require('./routes/question');
 const answersRoutes = require('./routes/answers');
+const userRoutes = require('./routes/users');
 
 const app = express();
 
@@ -19,11 +20,12 @@ app.use(express.json());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Headers', 'x-access-token, Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
 
+app.use('/api/auth', userRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/module', moduleRoutes);
 app.use('/api/question', questionRoutes);
